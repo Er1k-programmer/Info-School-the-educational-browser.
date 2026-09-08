@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7c3aed">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Info School</title>
+<style>
+:root{--ink:#172033;--white:#fff;--purple:#7c3aed;--blue:#1677ff;--cyan:#00a896;--red:#ff3b3b;--orange:#ff7a00;--yellow:#f4c400;--green:#10b981}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);min-height:100vh;background:linear-gradient(135deg,#d8fff7,#dcecff 30%,#ffe0eb 55%,#fff0d6 78%,#dfffea)}
+header{text-align:center;padding:28px 16px 18px}.logo{display:inline-flex;align-items:center;gap:12px;font-size:clamp(35px,9vw,58px);font-weight:900;letter-spacing:-2px}.bubble{display:grid;place-items:center;width:62px;height:62px;border-radius:20px;background:linear-gradient(135deg,var(--cyan),var(--blue),#ec4899,var(--orange));color:#fff;box-shadow:0 10px 25px #7c3aed55}.tagline{margin:8px auto 0;max-width:680px;font-size:17px;font-weight:650}
+main{width:min(1050px,94%);margin:auto;padding-bottom:35px}.box{background:#fffffff2;border-radius:26px;padding:18px;box-shadow:0 12px 30px #00000018;margin-top:16px}.searchrow{display:flex;gap:10px;flex-wrap:wrap}input{flex:1;min-width:190px;border:3px solid #ddd6fe;border-radius:18px;padding:15px 17px;font-size:17px;outline:0}input:focus{border-color:var(--purple)}button,.link{border:0;border-radius:18px;padding:14px 17px;font-size:16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.searchbtn{background:linear-gradient(135deg,var(--cyan),var(--blue),#ec4899,var(--orange));color:#fff}.note{margin-top:14px;padding:12px 15px;background:#fff7ed;border-left:6px solid var(--orange);border-radius:14px}
+.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.subject{color:#fff;box-shadow:0 7px 16px #0002}.s1{background:var(--red)}.s2{background:var(--orange)}.s3{background:var(--yellow);color:#332900}.s4{background:var(--green)}.s5{background:var(--blue)}.s6{background:var(--purple)}
+.panel{display:none;margin-top:15px}.suggestions{display:flex;flex-wrap:wrap;gap:9px}.suggestion{background:#fff;border:2px solid #cbd5e1;color:#243047;border-radius:999px;padding:10px 13px}.webbuttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.webbuttons .link{color:#fff}.wiki{background:#1677ff}.youtube{background:#ff3b3b}.rae{background:#ff7a00}.google{background:#00a896}.quick{display:flex;flex-wrap:wrap;gap:9px}.chip{background:#fff;border:2px solid #e2e8f0;color:#334155;border-radius:999px;padding:10px 13px;font-weight:750;cursor:pointer}
+footer{text-align:center;padding:18px;color:#475569;font-size:14px}
+@media(max-width:480px){.searchbtn{width:100%}.webbuttons{grid-template-columns:1fr}.subjects{grid-template-columns:1fr 1fr}.logo{font-size:36px}.bubble{width:52px;height:52px}}
+</style>
+</head>
+<body>
+<header><div class="logo"><span class="bubble">🔎</span>Info School</div><div class="tagline">Busca, aprende y descubre información para tus trabajos escolares.</div></header>
+<main>
+<section class="box"><div class="searchrow"><input id="q" type="search" placeholder="¿Qué quieres buscar?" autocomplete="off"><button class="searchbtn" type="button" onclick="showSearches()">🔍 Buscar</button></div><div class="note">💡 Info School no inventa resultados. Cuando buscas, te lleva directamente a las páginas correspondientes.</div><div id="results" style="display:none;margin-top:15px"></div></section>
+<section class="box"><h2>🎒 Asignaturas</h2><div class="subjects"><button class="subject s1" onclick="subject('Matemáticas')">🔴 Matemáticas</button><button class="subject s2" onclick="subject('Lenguaje')">🟠 Lenguaje</button><button class="subject s3" onclick="subject('Ciencias')">🟡 Ciencias</button><button class="subject s4" onclick="subject('Historia')">🟢 Historia</button><button class="subject s5" onclick="subject('Geografía')">🔵 Geografía</button><button class="subject s6" onclick="subject('Repaso')">🟣 Repaso</button></div><div id="panel" class="panel"><h2 id="title"></h2><p>Elige una sugerencia:</p><div id="suggestions" class="suggestions"></div></div></section>
+<section class="box"><h2>🌐 Menú de páginas web</h2><p>Abre cada servicio directamente. No usamos redirecciones intermedias.</p><div class="webbuttons"><a class="link wiki" id="wikiLink" href="https://es.wikipedia.org/" target="_blank" rel="noopener">📚 Wikipedia</a><a class="link youtube" id="youtubeLink" href="https://www.youtube.com/" target="_blank" rel="noopener">▶️ YouTube</a><a class="link rae" id="raeLink" href="https://dle.rae.es/" target="_blank" rel="noopener">📖 RAE</a><a class="link google" id="googleLink" href="https://www.google.com/" target="_blank" rel="noopener">🌐 Google</a></div></section>
+<section class="box"><h2>✨ Búsquedas rápidas</h2><div class="quick"><button class="chip" onclick="quick('sistema solar')">🌌 Sistema solar</button><button class="chip" onclick="quick('fotosíntesis')">🌱 Fotosíntesis</button><button class="chip" onclick="quick('Segunda Guerra Mundial')">🗺️ Historia</button><button class="chip" onclick="quick('fracciones')">➗ Matemáticas</button><button class="chip" onclick="quick('Miguel de Cervantes')">✍️ Literatura</button><button class="chip" onclick="quick('energías renovables')">⚡ Ciencia</button></div></section>
+</main><footer>Info School • Herramienta educativa • © 2026</footer>
+<script>
+const S={Matemáticas:['fracciones','ecuaciones','geometría','porcentajes','potencias','divisiones'],Lenguaje:['sustantivos','verbos','adjetivos','ortografía','sinónimos y antónimos','comprensión lectora'],Ciencias:['fotosíntesis','sistema solar','célula','ecosistemas','animales vertebrados','cuerpo humano'],Historia:['Edad Media','Antiguo Egipto','Roma','Revolución Francesa','Primera Guerra Mundial','España'],Geografía:['continentes','océanos','ríos de España','climas','montañas','capitales del mundo'],Repaso:['cultura general','ciencia','historia','geografía','matemáticas','lengua']};
+const $=id=>document.getElementById(id), enc=x=>encodeURIComponent(x);
+function links(q){return{wiki:'https://es.wikipedia.org/w/index.php?search='+enc(q),youtube:'https://www.youtube.com/results?search_query='+enc(q),rae:'https://dle.rae.es/'+enc(q),google:'https://www.google.com/search?q='+enc(q)}}
+function showSearches(){let q=$('q').value.trim();if(!q){$('q').focus();return}let u=links(q);$('results').style.display='block';$('results').innerHTML='<b>Elige dónde buscar:</b><div class="webbuttons" style="margin-top:10px"><a class="link wiki" href="'+u.wiki+'" target="_blank" rel="noopener">📚 Wikipedia</a><a class="link youtube" href="'+u.youtube+'" target="_blank" rel="noopener">▶️ YouTube</a><a class="link rae" href="'+u.rae+'" target="_blank" rel="noopener">📖 RAE</a><a class="link google" href="'+u.google+'" target="_blank" rel="noopener">🌐 Google</a></div>'}
+function subject(s){$('panel').style.display='block';$('title').textContent='📘 '+s;$('suggestions').innerHTML='';S[s].forEach(x=>{let b=document.createElement('button');b.className='suggestion';b.textContent='🔎 '+x;b.onclick=()=>{$('q').value=x;showSearches();$('q').scrollIntoView({behavior:'smooth',block:'center'})};$('suggestions').appendChild(b)})}
+function quick(x){$('q').value=x;showSearches();$('q').scrollIntoView({behavior:'smooth',block:'center'})}
+$('q').addEventListener('keydown',e=>{if(e.key==='Enter')showSearches()});
+</script>
+</body>
+</html>
